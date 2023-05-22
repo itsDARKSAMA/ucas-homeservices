@@ -1,0 +1,60 @@
+name: homeservices
+description: Home Services application
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  cupertino_icons: ^1.0.2
+  flutter_onboard: ^2.0.0
+  flutter_svg: ^2.0.5
+  intl_phone_field: ^3.1.0
+  dotted_border: ^2.0.0+3
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  get: ^4.6.5
+  http: ^1.0.0
+  shared_preferences: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+  generate: true # Add this line
+
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+
+  # All of these fonts are temporary,
+  # and after completing the ui,
+  # the useless fonts will be deleted.
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets\fonts\Poppins\Poppins-Black.ttf
+        - asset: assets\fonts\Poppins\Poppins-Bold.ttf
+        - asset: assets\fonts\Poppins\Poppins-ExtraBold.ttf
+        - asset: assets\fonts\Poppins\Poppins-Italic.ttf
+        - asset: assets\fonts\Poppins\Poppins-ExtraLight.ttf
+        - asset: assets\fonts\Poppins\Poppins-Light.ttf
+        - asset: assets\fonts\Poppins\Poppins-Medium.ttf
+        - asset: assets\fonts\Poppins\Poppins-Regular.ttf
+        - asset: assets\fonts\Poppins\Poppins-SemiBold.ttf
+        - asset: assets\fonts\Poppins\Poppins-Thin.ttf
+
