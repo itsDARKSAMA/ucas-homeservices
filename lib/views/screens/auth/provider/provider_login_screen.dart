@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homeservices/constants.dart';
+import 'package:homeservices/controllers/auth/provider_login_controller.dart';
 import 'package:homeservices/views/widgets/custom_phone_texfield_widget.dart';
 import 'package:homeservices/views/widgets/custom_textfield_widget.dart';
 import 'package:homeservices/views/widgets/gradient_button_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProviderLoginScreen extends StatefulWidget {
-  final TextEditingController mobileController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  ProviderLoginScreen({
-    super.key,
-  });
-
-  @override
-  State<ProviderLoginScreen> createState() => _ProviderLoginScreenState();
-}
-
-class _ProviderLoginScreenState extends State<ProviderLoginScreen> {
-  bool _isRememberChecked = false;
+class ProviderLoginScreen extends StatelessWidget {
+  final ProviderLoginController _controller =
+      Get.put(ProviderLoginController());
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,11 +18,11 @@ class _ProviderLoginScreenState extends State<ProviderLoginScreen> {
       child: Column(
         children: [
           const SizedBox(height: 50),
-          CustomPhoneTextField(controller: widget.mobileController),
+          CustomPhoneTextField(controller: _controller.mobileController),
           const SizedBox(height: 30),
           CustomTextField(
             textHint: AppLocalizations.of(context)?.password ?? 'Password',
-            controller: widget.passwordController,
+            controller: _controller.passwordController,
             isPassword: true,
           ),
           Padding(
@@ -39,27 +30,33 @@ class _ProviderLoginScreenState extends State<ProviderLoginScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Checkbox(
-                      shape: const CircleBorder(),
-                      activeColor: primaryColor,
-                      value: _isRememberChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _isRememberChecked = value!;
-                        });
-                      },
-                    ),
-                    Text(
-                      AppLocalizations.of(context)?.rememberMe ?? "Remember me",
-                      style: const TextStyle(fontSize: smallFontSize),
-                    ),
-                  ],
-                ),
+                GetBuilder(
+                    init: ProviderLoginController(),
+                    builder: (controller) {
+                      return InkWell(
+                        onTap: () => _controller.toggleRemember(),
+                        child: Row(
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Checkbox(
+                              shape: const CircleBorder(),
+                              activeColor: primaryColor,
+                              value: _controller.isRememberChecked,
+                              onChanged: (_) => _controller.toggleRemember(),
+                            ),
+                            Text(
+                              AppLocalizations.of(context)?.rememberMe ??
+                                  "Remember me",
+                              style: const TextStyle(fontSize: smallFontSize),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () => Get.offAllNamed(
+                          '/home',
+                        ),
                     child: Text(AppLocalizations.of(context)?.forgotPassword ??
                         "forgot password ?")),
               ],
@@ -96,12 +93,9 @@ class _ProviderLoginScreenState extends State<ProviderLoginScreen> {
                   ],
                 ),
                 GradientButtonWidget(
-                  text: AppLocalizations.of(context)?.login.toUpperCase() ??
-                      "LOGIN",
-                  onTap: () => Get.offAllNamed(
-                    '/home',
-                  ),
-                ),
+                    text: AppLocalizations.of(context)?.login.toUpperCase() ??
+                        "LOGIN",
+                    onTap: () {}),
               ],
             ),
           ),

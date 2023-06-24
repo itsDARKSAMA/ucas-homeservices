@@ -39,7 +39,7 @@ class CustomerLoginScreen extends StatelessWidget {
                     init: CustomerLoginController(),
                     builder: (controller) {
                       return InkWell(
-                        onTap: () => _controller.checkButton(),
+                        onTap: () => _controller.toggleRemember(),
                         child: Row(
                           // mainAxisSize: MainAxisSize.min,
                           children: [
@@ -47,7 +47,7 @@ class CustomerLoginScreen extends StatelessWidget {
                               shape: const CircleBorder(),
                               activeColor: primaryColor,
                               value: _controller.isRememberChecked,
-                              onChanged: (_) => _controller.checkButton(),
+                              onChanged: (_) => _controller.toggleRemember(),
                             ),
                             Text(
                               AppLocalizations.of(context)?.rememberMe ??

@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homeservices/constants.dart';
+import 'package:homeservices/controllers/orders_contoller.dart';
 import 'package:homeservices/views/screens/orders/completed_orders_screen.dart';
 import 'package:homeservices/views/screens/orders/pending_orders_screen.dart';
 import 'package:homeservices/views/screens/orders/underway_orders_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class OrdersScreen extends StatefulWidget {
-  const OrdersScreen({super.key});
-
-  @override
-  State<OrdersScreen> createState() => _OrdersScreenState();
-}
-
-class _OrdersScreenState extends State<OrdersScreen>
-    with TickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    _tabController = TabController(
-        length: 3,
-        vsync: this,
-        animationDuration: Duration.zero,
-        initialIndex: 0);
-    super.initState();
-  }
+class OrdersScreen extends StatelessWidget {
+  OrdersScreen({super.key});
+  final OrdersController _contoller = Get.put(OrdersController());
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +49,7 @@ class _OrdersScreenState extends State<OrdersScreen>
                         text: AppLocalizations.of(context)?.completed ??
                             'Completed'),
                   ],
-                  controller: _tabController,
+                  controller: _contoller.tabController,
                   // indicatorSize: TabBarIndicatorSize.tab,
                 ),
               ],
@@ -72,7 +57,7 @@ class _OrdersScreenState extends State<OrdersScreen>
             Expanded(
               flex: 3,
               child: TabBarView(
-                controller: _tabController,
+                controller: _contoller.tabController,
                 children: const [
                   PendingOrdersScreen(),
                   UnderwayOrdersScreen(),

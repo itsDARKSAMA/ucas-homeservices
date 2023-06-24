@@ -14,10 +14,11 @@ class CustomerLoginController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
-  bool isRememberChecked = false;
+  bool _isRememberChecked = false;
+  bool get isRememberChecked => _isRememberChecked;
 
-  checkButton() {
-    isRememberChecked = !isRememberChecked;
+  void toggleRemember() {
+    _isRememberChecked = !_isRememberChecked;
     update();
   }
 
@@ -82,5 +83,13 @@ class CustomerLoginController extends GetxController {
         colorText: Colors.white,
       );
     }
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    passwordController.dispose();
+    emailController.dispose();
   }
 }

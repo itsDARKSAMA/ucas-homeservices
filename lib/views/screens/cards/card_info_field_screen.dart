@@ -60,7 +60,7 @@ class CardInfoFieldScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: largeFontSize,
                             fontWeight: FontWeight.w800,
-                            color: orangeColor),
+                            color: redColor),
                       ),
                     ],
                   ),

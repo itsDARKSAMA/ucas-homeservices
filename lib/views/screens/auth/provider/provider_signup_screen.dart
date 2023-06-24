@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homeservices/constants.dart';
+import 'package:homeservices/controllers/auth/provider_signup_controller.dart';
 import 'package:homeservices/views/widgets/custom_phone_texfield_widget.dart';
 import 'package:homeservices/views/widgets/custom_textfield_widget.dart';
 import 'package:homeservices/views/widgets/gradient_button_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProviderSignUpScreen extends StatefulWidget {
-  final TextEditingController mobileController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  ProviderSignUpScreen({
-    super.key,
-  });
-
-  @override
-  State<ProviderSignUpScreen> createState() => _ProviderSignUpScreenState();
-}
-
-class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
-  bool _isRememberChecked = false;
+class ProviderSignUpScreen extends StatelessWidget {
+  final ProviderSignupController _controller =
+      Get.put(ProviderSignupController());
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,54 +20,54 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
           const SizedBox(height: 35),
           CustomTextField(
             textHint: AppLocalizations.of(context)?.fullname ?? 'Full Name',
-            controller: widget.nameController,
+            controller: _controller.nameController,
           ),
           const SizedBox(height: 10),
           CustomTextField(
             textHint: AppLocalizations.of(context)?.email ?? 'Email',
-            controller: widget.emailController,
+            controller: _controller.emailController,
           ),
           const SizedBox(height: 10),
-          CustomPhoneTextField(controller: widget.mobileController),
+          CustomPhoneTextField(controller: _controller.mobileController),
           const SizedBox(height: 10),
           CustomTextField(
             textHint: AppLocalizations.of(context)?.password ?? 'Password',
-            controller: widget.passwordController,
+            controller: _controller.passwordController,
             isPassword: true,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Checkbox(
-                  shape: const CircleBorder(),
-                  activeColor: primaryColor,
-                  value: _isRememberChecked,
-                  onChanged: (value) {
-                    setState(() {
-                      _isRememberChecked = value!;
-                    });
-                  },
-                ),
-                Text(
-                  AppLocalizations.of(context)?.iReadAndAccept ??
-                      "I Read and Accept Home Service",
-                  style: const TextStyle(fontSize: 10),
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Text(
-                      AppLocalizations.of(context)
-                              ?.homeServiceTermsConditions ??
-                          "Terms & Conditions",
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: primaryColor,
+            child: GetBuilder(
+                init: ProviderSignupController(),
+                builder: (_) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        shape: const CircleBorder(),
+                        activeColor: primaryColor,
+                        value: _controller.isAccepted,
+                        onChanged: (value) => _controller.toggleAccept(),
                       ),
-                    )),
-              ],
-            ),
+                      Text(
+                        AppLocalizations.of(context)?.iReadAndAccept ??
+                            "I Read and Accept Home Service",
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                      InkWell(
+                          onTap: () {},
+                          child: Text(
+                            AppLocalizations.of(context)
+                                    ?.homeServiceTermsConditions ??
+                                "Terms & Conditions",
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: primaryColor,
+                            ),
+                          )),
+                    ],
+                  );
+                }),
           ),
           const SizedBox(height: 50),
           Padding(

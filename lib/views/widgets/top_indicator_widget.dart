@@ -12,7 +12,7 @@ class _TopIndicatorBox extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
     Paint paint = Paint()
-      ..color = orangeColor
+      ..color = blackColor
       ..strokeWidth = 3
       ..isAntiAlias = true;
 

@@ -23,7 +23,7 @@ List<GetPage<dynamic>> getRoutes = [
   ),
   GetPage(
     name: "/home",
-    page: () => const HomeScreen(),
+    page: () => HomeScreen(),
     transition: defaultScreensTranstion,
   ),
   // GetPage(
@@ -63,7 +63,7 @@ List<GetPage<dynamic>> getRoutes = [
   ),
   GetPage(
     name: "/login",
-    page: () => const LoginScreen(),
+    page: () => LoginScreen(),
     transition: defaultScreensTranstion,
   ),
   GetPage(
@@ -86,7 +86,7 @@ const offWhiteColor = Color(0xffF2F6F6);
 const pinkColor = Color(0xffDE1487);
 const redColor = Color(0xffd55252);
 const greenColor = Color(0xff00B3B3);
-const orangeColor = Color(0xffAF8344);
+// const orangeColor = Color(0xffAF8344);
 Gradient primaryGradient = const LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
@@ -127,7 +127,7 @@ ThemeData appTheme = ThemeData(
     ),
     errorBorder: const OutlineInputBorder(
       borderSide: BorderSide(
-        color: orangeColor,
+        color: redColor,
       ),
     ),
     focusedBorder: const OutlineInputBorder(

@@ -7,7 +7,7 @@ class ApiEndpoitns {
 class _CustomerEndpoints {
   final String customerLogin = "/auth/login/user";
   final String customerSignUp = "/auth/register/user";
-  final String allWorks = "/auth/register/user";
+  final String allWorks = "/all/works";
 }
 
 // class _ProviderEndpoints {

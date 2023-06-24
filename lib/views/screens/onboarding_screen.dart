@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboard/flutter_onboard.dart';
+import 'package:get/get.dart';
 import 'package:homeservices/constants.dart';
-import 'package:homeservices/views/screens/auth/login_screen.dart';
 import 'package:homeservices/views/widgets/large_gradient_button_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,20 +15,12 @@ class OnboardingScreen extends StatelessWidget {
         pageController: _pageController,
         skipButton: TextButton(
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ));
+            Get.offAllNamed("/login");
           },
           child: Text(AppLocalizations.of(context)?.skip ?? "Skip"),
         ),
         onDone: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginScreen(),
-              ));
+          Get.offAllNamed("/login");
         },
         onBoardData: onBoardData(context),
         titleStyles: const TextStyle(
@@ -64,11 +56,7 @@ class OnboardingScreen extends StatelessWidget {
         curve: Curves.easeInOutSine,
       );
     } else {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ));
+      Get.offAllNamed("/login");
     }
   }
 }

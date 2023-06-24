@@ -113,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                                   children: [
                                     const Icon(
                                       Icons.logout,
-                                      color: orangeColor,
+                                      color: redColor,
                                     ),
                                     const SizedBox(width: 10),
                                     Text(

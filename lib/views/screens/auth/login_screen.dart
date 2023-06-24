@@ -1,29 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homeservices/constants.dart';
+import 'package:homeservices/controllers/auth/login_controller.dart';
 import 'package:homeservices/views/screens/auth/customer/customer_login_screen.dart';
 import 'package:homeservices/views/screens/auth/provider/provider_login_screen.dart';
 import 'package:homeservices/views/widgets/app_logo_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen>
-    with TickerProviderStateMixin {
-  late final TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _tabController = TabController(length: 2, vsync: this);
-  }
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+  final LoginController _controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen>
                   child: Column(
                     children: [
                       TabBar(
-                        controller: _tabController,
+                        controller: _controller.tabController,
                         tabs: [
                           Tab(
                               text: AppLocalizations.of(context)
@@ -68,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       Expanded(
                         child: TabBarView(
-                          controller: _tabController,
+                          controller: _controller.tabController,
                           children: [
                             ProviderLoginScreen(),
                             CustomerLoginScreen(),

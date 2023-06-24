@@ -74,4 +74,13 @@ class CustomerSignUpController extends GetxController {
       );
     }
   }
+
+  @override
+  void onClose() {
+    super.onClose();
+    phoneController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    emailController.dispose();
+  }
 }
